@@ -5,7 +5,7 @@ nodes = 101;
 length = 1; %in meters
 xcoord = linspace(0,length,nodes);
 timeStep = .001;
-timeEnd = 15.5;
+timeEnd = 1;
 numTimeSteps = floor(timeEnd/timeStep);
 time = linspace(0,timeEnd, numTimeSteps);
 stiffness = 1000;
@@ -21,11 +21,11 @@ initialPlucky = .002;
 for i=1:size(xcoord,2)
     if(xcoord(i) < initialPluckx)
         varSlope = initialPlucky/initialPluckx;
-        ycoord(i) = varSlope*xcoord(i);
+        ycoord(i) = varSlope*xcoord(i) + random('Normal',-.02,.02);
     else
         varSlope = -initialPlucky/(length - initialPluckx);
         varOffset = (initialPlucky*length)/(length - initialPluckx);
-        ycoord(i) = varSlope*xcoord(i) + varOffset;
+        ycoord(i) = varSlope*xcoord(i) + varOffset + random('Normal',-.02,.02);
     end
 end
 
